@@ -1,0 +1,19 @@
+ws.onmessage = response => {
+  let x = JSON.parse(response.data).data;
+  console.log(x);
+  if(x!=undefined){
+    let res = x.map((str) => String.fromCharCode(str));
+    for(let x = 0;x < res.length; x++){
+      y = res[x].charCodeAt(0);
+      if (y > 127){
+        res[x] = res[x]+res[x+1];
+        res.splice(x+1,1);
+      }
+    }
+    let finish = res.join('');
+
+    printMessage(finish);
+    console.log(finish);
+    console.log(res);
+    //console.log("Ñ\x8D".charCodeAt(0));
+  }
